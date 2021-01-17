@@ -11,6 +11,7 @@ class CategoriesScreen extends StatelessWidget {
         title: const Text('Menu'),
       ),
       body: GridView(
+          padding: EdgeInsets.all(15),
           children: DATA_CATEGORIES
               .map((element) => CategoryItem(
                     title: element.title,
