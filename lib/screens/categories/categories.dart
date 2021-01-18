@@ -1,9 +1,12 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import 'package:menuApp/components/category-item/category-item.dart';
 import 'package:menuApp/data/data.dart';
 
 class CategoriesScreen extends StatelessWidget {
+  static const String routeName = '/';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,6 +17,7 @@ class CategoriesScreen extends StatelessWidget {
           padding: EdgeInsets.all(15),
           children: DATA_CATEGORIES
               .map((element) => CategoryItem(
+                    id: element.id,
                     title: element.title,
                     color: element.color,
                   ))
