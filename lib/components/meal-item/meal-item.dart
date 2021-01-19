@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:menuApp/models/meals.dart';
+import 'package:menuApp/screens/meals-details/meals-details.dart';
 
 class MealsItem extends StatelessWidget {
+  final String id;
   final String title;
   final String imageUrl;
   final int duration;
@@ -9,6 +11,7 @@ class MealsItem extends StatelessWidget {
   final Affordability affordability;
 
   MealsItem({
+    @required this.id,
     @required this.title,
     @required this.imageUrl,
     @required this.duration,
@@ -44,11 +47,17 @@ class MealsItem extends StatelessWidget {
     }
   }
 
-  void onSelectHandler() {}
+  void onSelectHandler(BuildContext ctx) {
+    Navigator.of(ctx).pushNamed(
+      MealsDetailsScreen.routeName,
+      arguments: id,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onSelectHandler,
+      onTap: () => onSelectHandler(context),
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
@@ -76,10 +85,10 @@ class MealsItem extends StatelessWidget {
                   child: Container(
                     width: 220,
                     color: Colors.white60,
-                    padding: EdgeInsets.all(15),
+                    padding: const EdgeInsets.all(15),
                     child: Text(
                       title,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 25,
                         color: Colors.black,
                       ),
@@ -91,7 +100,7 @@ class MealsItem extends StatelessWidget {
               ],
             ),
             Padding(
-              padding: EdgeInsets.all(25),
+              padding: const EdgeInsets.all(25),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
