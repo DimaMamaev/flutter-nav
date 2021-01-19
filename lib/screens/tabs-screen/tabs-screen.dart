@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:menuApp/components/main-drawer/main-drawer.dart';
 import 'package:menuApp/screens/categories/categories.dart';
 import 'package:menuApp/screens/favorites/favorites.dart';
 
@@ -9,9 +10,15 @@ class TabScreen extends StatefulWidget {
 }
 
 class _TabScreenState extends State<TabScreen> {
-  final List<Widget> _routes = [
-    CategoriesScreen(),
-    FavoritesScreen(),
+  final List<Map<String, Object>> _routes = [
+    {
+      'page': CategoriesScreen(),
+      'title': 'Menu',
+    },
+    {
+      'page': FavoritesScreen(),
+      'title': 'Your favorites',
+    },
   ];
 
   int _selectedRouteIndex = 0;
@@ -25,7 +32,13 @@ class _TabScreenState extends State<TabScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _routes[_selectedRouteIndex],
+      appBar: AppBar(
+        title: Text(_routes[_selectedRouteIndex]['title']),
+      ),
+      drawer: Drawer(
+        child: MainDrawer(),
+      ),
+      body: _routes[_selectedRouteIndex]['page'],
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectorHandler,
         backgroundColor: Theme.of(context).primaryColor,
