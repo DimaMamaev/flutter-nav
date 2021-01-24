@@ -3,6 +3,10 @@ import 'package:menuApp/components/main-drawer/main-drawer.dart';
 
 class SettingsScreen extends StatefulWidget {
   static const String routeName = '/settings-screen';
+  final Function saveSettingsHandler;
+  final Map<String, bool> filters;
+
+  SettingsScreen(this.filters, this.saveSettingsHandler);
 
   @override
   _SettingsScreenState createState() => _SettingsScreenState();
@@ -13,6 +17,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool _vegan = false;
   bool _vegetarian = false;
   bool _lactoseFree = false;
+
+  @override
+  initState() {
+    _glutenFree = widget.filters['gluten'];
+    _vegan = widget.filters['lactose'];
+    _vegetarian = widget.filters['vegan'];
+    _lactoseFree = widget.filters['vegeterian'];
+    super.initState();
+  }
 
   Widget switcher(
     String title,
@@ -33,6 +46,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Settings'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.save_alt_rounded),
+            onPressed: () {
+              final selectedFilters = {
+                'gluten': _glutenFree,
+                'lactose': _lactoseFree,
+                'vegan': _vegan,
+                'vegeterian': _vegetarian,
+              };
+              widget.saveSettingsHandler(selectedFilters);
+            },
+          )
+        ],
       ),
       drawer: MainDrawer(),
       body: Column(
@@ -71,8 +98,35 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   _lactoseFree = newVal;
                 });
               }),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(
+                    'To save filters press:',
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
+                  Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: FlatButton(
+                        child: Icon(
+                          Icons.save_alt_rounded,
+                          size: 40,
+                          color: Theme.of(context).primaryColor,
+                        ),
+                        onPressed: () {
+                          final selectedFilters = {
+                            'gluten': _glutenFree,
+                            'lactose': _lactoseFree,
+                            'vegan': _vegan,
+                            'vegeterian': _vegetarian,
+                          };
+                          widget.saveSettingsHandler(selectedFilters);
+                        },
+                      )),
+                ],
+              )
             ]),
-          )
+          ),
         ],
       ),
     );
