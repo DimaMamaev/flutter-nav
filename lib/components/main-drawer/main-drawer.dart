@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:menuApp/screens/settings/settings.dart';
 
 class MainDrawer extends StatelessWidget {
-  Widget buildMenuItem(String title, IconData iconName) {
+  Widget buildMenuItem(String title, IconData iconName, Function routeHandler) {
     return ListTile(
       leading: Icon(
         iconName,
@@ -13,7 +14,7 @@ class MainDrawer extends StatelessWidget {
           fontSize: 25,
         ),
       ),
-      onTap: () {},
+      onTap: routeHandler,
     );
   }
 
@@ -39,8 +40,21 @@ class MainDrawer extends StatelessWidget {
           SizedBox(
             height: 15,
           ),
-          buildMenuItem('Meals', Icons.restaurant_menu_outlined),
-          buildMenuItem('Settings', Icons.settings_applications_outlined),
+          buildMenuItem(
+            'Meals',
+            Icons.restaurant_menu_outlined,
+            () {
+              Navigator.of(context).pushReplacementNamed('/');
+            },
+          ),
+          buildMenuItem(
+            'Settings',
+            Icons.settings_applications_outlined,
+            () {
+              Navigator.of(context)
+                  .pushReplacementNamed(SettingsScreen.routeName);
+            },
+          ),
         ],
       ),
     );
