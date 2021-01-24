@@ -19,7 +19,7 @@ class MealsItem extends StatelessWidget {
     @required this.duration,
     @required this.affordability,
     @required this.complexity,
-    @required this.removeItem,
+    this.removeItem,
   });
 
   String get complexityString {
