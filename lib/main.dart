@@ -25,6 +25,7 @@ class _MyAppState extends State<MyApp> {
   };
 
   List<Meal> _mealsData = DATA_MEALS;
+  List<Meal> _favoritesData = [];
 
   void _filterHandler(Map<String, bool> filterData) {
     setState(() {
@@ -48,6 +49,23 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  void _toggleFavorites(String mealId) {
+    final checkIndex = _favoritesData.indexWhere((meal) => meal.id == mealId);
+    if (checkIndex >= 0) {
+      setState(() {
+        _favoritesData.removeAt(checkIndex);
+      });
+    } else {
+      setState(() {
+        _favoritesData.add(DATA_MEALS.firstWhere((meal) => meal.id == mealId));
+      });
+    }
+  }
+
+  bool _isFavorite(String mealId) {
+    return _favoritesData.any((meal) => meal.id == mealId);
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -63,14 +81,17 @@ class _MyAppState extends State<MyApp> {
                 fontWeight: FontWeight.w700,
               ))),
       routes: {
-        TabScreen.routeName: (context) => TabScreen(),
+        TabScreen.routeName: (context) => TabScreen(_favoritesData),
         MealsScreen.routeName: (context) => MealsScreen(_mealsData),
-        MealsDetailsScreen.routeName: (context) => MealsDetailsScreen(),
+        MealsDetailsScreen.routeName: (context) => MealsDetailsScreen(
+              favoritesHandler: _toggleFavorites,
+              isFavorite: _isFavorite,
+            ),
         SettingsScreen.routeName: (context) =>
             SettingsScreen(_filters, _filterHandler),
       },
       onUnknownRoute: (settings) {
-        return MaterialPageRoute(builder: (ctx) => TabScreen());
+        return MaterialPageRoute(builder: (ctx) => TabScreen(_favoritesData));
       },
     );
   }

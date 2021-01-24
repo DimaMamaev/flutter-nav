@@ -4,6 +4,11 @@ import '../../data/data.dart';
 
 class MealsDetailsScreen extends StatelessWidget {
   static final String routeName = '/meals-details';
+  final Function favoritesHandler;
+  final Function isFavorite;
+
+  MealsDetailsScreen({this.favoritesHandler, this.isFavorite});
+
   @override
   Widget build(BuildContext context) {
     final mealId = ModalRoute.of(context).settings.arguments as String;
@@ -62,13 +67,29 @@ class MealsDetailsScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-              height: systemComponentsWidth * 0.4,
-              width: double.infinity,
-              child: Image.network(
-                selectedMeal.imageUrl,
-                fit: BoxFit.cover,
-              ),
+            Stack(
+              children: [
+                Container(
+                  height: systemComponentsWidth * 0.4,
+                  width: double.infinity,
+                  child: Image.network(
+                    selectedMeal.imageUrl,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                Positioned(
+                    bottom: 20,
+                    right: 10,
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.star_border_purple500_sharp,
+                        color:
+                            isFavorite(mealId) ? Colors.green : Colors.yellow,
+                        size: 50,
+                      ),
+                      onPressed: () => favoritesHandler(mealId),
+                    ))
+              ],
             ),
             sectionTitle('Ingridients', context),
             containerWrapper(context, selectedMeal.ingredients),
