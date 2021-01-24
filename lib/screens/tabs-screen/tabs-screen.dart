@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:menuApp/components/main-drawer/main-drawer.dart';
-import 'package:menuApp/screens/categories/categories.dart';
-import 'package:menuApp/screens/favorites/favorites.dart';
+
+import '../../components/main-drawer/main-drawer.dart';
+import '../../screens/categories/categories.dart';
+import '../../screens/favorites/favorites.dart';
 
 class TabScreen extends StatefulWidget {
   static final String routeName = '/';

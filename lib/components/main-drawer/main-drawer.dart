@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:menuApp/screens/settings/settings.dart';
+
+import '../../screens/settings/settings.dart';
 
 class MainDrawer extends StatelessWidget {
   Widget buildMenuItem(String title, IconData iconName, Function routeHandler) {

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:menuApp/data/data.dart';
-import 'package:menuApp/models/meals.dart';
+import './data/data.dart';
+import './models/meals.dart';
 
-import 'package:menuApp/screens/meals-details/meals-details.dart';
-import 'package:menuApp/screens/meals/meals.dart';
-import 'package:menuApp/screens/settings/settings.dart';
-import 'package:menuApp/screens/tabs-screen/tabs-screen.dart';
+import './screens/meals-details/meals-details.dart';
+import './screens/meals/meals.dart';
+import './screens/settings/settings.dart';
+import './screens/tabs-screen/tabs-screen.dart';
 
 void main() {
   runApp(MyApp());
