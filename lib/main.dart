@@ -76,7 +76,10 @@ class _MyAppState extends State<MyApp> {
           canvasColor: Color.fromRGBO(255, 254, 229, 1),
           fontFamily: 'HindSiliguri',
           textTheme: ThemeData.light().textTheme.copyWith(
-                  headline6: TextStyle(
+              headline5: TextStyle(
+                fontSize: 20,
+              ),
+              headline6: TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.w700,
               ))),

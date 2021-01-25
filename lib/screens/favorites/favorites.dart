@@ -30,6 +30,10 @@ class FavoritesScreen extends StatelessWidget {
                 },
                 itemCount: favoriteMeals.length,
               )
-            : Text('Your favorite meals list is empty!'));
+            : Text(
+                'Your favorite meals list is empty!',
+                style: Theme.of(context).textTheme.headline5,
+                textAlign: TextAlign.center,
+              ));
   }
 }

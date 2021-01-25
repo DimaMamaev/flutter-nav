@@ -42,19 +42,25 @@ class _MealsScreenState extends State<MealsScreen> {
         title: Text(widgetArgs['title']),
       ),
       body: Center(
-        child: ListView.builder(
-          itemBuilder: (ctx, index) {
-            return MealsItem(
-                id: filteredMealsById[index].id,
-                title: filteredMealsById[index].title,
-                imageUrl: filteredMealsById[index].imageUrl,
-                duration: filteredMealsById[index].duration,
-                affordability: filteredMealsById[index].affordability,
-                complexity: filteredMealsById[index].complexity,
-                removeItem: _removeMeal);
-          },
-          itemCount: filteredMealsById.length,
-        ),
+        child: filteredMealsById.length > 0
+            ? ListView.builder(
+                itemBuilder: (ctx, index) {
+                  return MealsItem(
+                      id: filteredMealsById[index].id,
+                      title: filteredMealsById[index].title,
+                      imageUrl: filteredMealsById[index].imageUrl,
+                      duration: filteredMealsById[index].duration,
+                      affordability: filteredMealsById[index].affordability,
+                      complexity: filteredMealsById[index].complexity,
+                      removeItem: _removeMeal);
+                },
+                itemCount: filteredMealsById.length,
+              )
+            : Text(
+                'There are no meals with such filter! Try to change it in settings.',
+                style: Theme.of(context).textTheme.headline5,
+                textAlign: TextAlign.center,
+              ),
       ),
     );
   }
